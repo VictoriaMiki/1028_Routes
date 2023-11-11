@@ -14,7 +14,7 @@ export default class TarefaRoutes {
       res.json(tarefas)
     })
     router.get('/:id', (req, res) => {
-      const tarefa = this.db.findById(req.params.id)
+      const tarefa = this.db.findById(Number(req.params.id))
       if (!tarefa) {
         res.status(404).json({ message: 'Tarefa não encontrada' })
       } else {
@@ -25,7 +25,7 @@ export default class TarefaRoutes {
       const novaTarefa = req.body
       
       if(!novaTarefa.titulo) return res.status(400).json({ message: 'O título é obrigatório' })
-      if(!novaTarefa.concluida) return res.status(400).json({ message: 'O campo concluída é obrigatório' })
+      if(novaTarefa.concluida == undefined) return res.status(400).json({ message: 'O campo concluída é obrigatório' })
       if(!novaTarefa.usuarioId) return res.status(400).json({ message: 'O campo usuárioId é obrigatório' })
 
       this.db.create(novaTarefa)
@@ -36,15 +36,14 @@ export default class TarefaRoutes {
       const tarefa = req.body
 
       if(!tarefa.titulo) return res.status(400).json({ message: 'O título é obrigatório' })
-      if(!tarefa.concluida) return res.status(400).json({ message: 'O campo concluída é obrigatório' })
+      if(tarefa.concluida == undefined) return res.status(400).json({ message: 'O campo concluída é obrigatório' })
       if(!tarefa.usuarioId) return res.status(400).json({ message: 'O campo usuárioId é obrigatório' })
 
-      this.db.update(id, tarefa)
+      this.db.update(Number(id), tarefa)
       res.json(tarefa)
     })
     router.delete('/:id', (req, res) => {
-      const { id } = req.params
-      this.db.delete(id)
+      this.db.delete(Number(req.params.id))
       res.json({ message: 'Tarefa removida com sucesso' })
     })
     return router

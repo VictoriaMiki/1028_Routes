@@ -1,7 +1,8 @@
 // index do paths importa os paths existentes (ex. tarefas) e exporta as rotas (ex. '/tarefas')
 
-import tarefas from './tarefas.js'
+import {getPostTarefas, getDeletePutTarefaById} from './tarefas.js'
 
 export default {
-    '/tarefas': tarefas
+    '/tarefas': getPostTarefas,
+    '/tarefas/{id}': getDeletePutTarefaById
 }
