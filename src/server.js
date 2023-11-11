@@ -4,7 +4,7 @@ import TarefaRoutes from "./routes/TarefaRoutes.js"
 // o processo é inverso do que se pensa: 
 // aqui é onde faz referência a tarefas e ao db, depois vai:
 // TarefaRoutes.js -> TarefaModel.js -> BaseModel.js -> config.js -> Tarefa.js
-// É assim que o processo é organizado
+// É assim que o processo é organizado. Por isso não importa o db nesses outros arquivos
 
 import swaggerUi from "swagger-ui-express"
 import swaggerDocument from "./swagger/config.js"
