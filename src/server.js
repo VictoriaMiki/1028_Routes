@@ -1,4 +1,5 @@
-import express from "express"
+import express, { application } from "express"
+import cors from "cors" // cors é para liberar acesso geral, pois os navegadores bloqueiam requisições http feitas por scripts por questões de segurança
 import db from "./database/config.js"
 import TarefaRoutes from "./routes/TarefaRoutes.js"
 // o processo é inverso do que se pensa: 
@@ -19,7 +20,11 @@ app.use('/tarefas', tarefaRoutes.routes())
 // Swagger
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, { explorer: true}))
 
-app.listen(3000, () => {
+// Cors
+app.use(cors())
+
+const port = process.env.PORT || 3000
+
+app.listen(port, () => {
   console.log("Servidor rodando na porta 3000")
 })
-
