@@ -23,6 +23,7 @@ app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, { explorer: t
 // Cors
 app.use(cors())
 
+// Render
 const port = process.env.PORT || 3000
 
 app.listen(port, () => {
